@@ -16,7 +16,7 @@ M365 Solution architect and Cloud consultant
 LinkedIn: ../chetamokafor
 
 
-# Introduction to GitHub Actions
+# M1 - Introduction to GitHub Actions
 What is GitHub Actions?
 
 GitHub Actions is a CI/CD and workflow automation platform built directly into GutHub.
@@ -79,7 +79,7 @@ A runner is the virtual or physicl machine that executes a job. Github provides 
 2. Selfhosted runners - Your own machine registered with GitHub.
 
 
-# Module 2 - Writing your first workflow
+# M 2 - Writing your first workflow
 Translate theory into practice.
 
 ## Workflow file anatomy (YAML Syntax)
@@ -93,7 +93,7 @@ Key Concept
 2. on key - defines the trigger
 3. jobs key - set of steps
 
-# Automating CI - Build and Test
+# M3 -Automating CI - Build and Test
 
 ## Setting up a build matrix
 Node.js v18, 20, 25
@@ -115,5 +115,30 @@ restore-keys
 Setup cache key using hashFiles
 use key: ${{runner.os}}-node-${{hashFiles('**/package-lock.json')}}
 
-## Running Tests and uploading results
+`- name: Setup Node.js`
+  `uses: actions/setup-node@v2`
+  `with:`
+    `node-version: ${{ matrix.node-version }}`
+    `cache: npm`
+    `cache-key: ${{runner.os}}-node-${{hashFiles('**/package-lock.json')}}`
 
+## Running Tests and uploading results
+CI's core purpose is automatic test execution. You run your test suite as a step and optionally upload a test-result artifact for later inspection
+
+Key concepts
+1. Test step - Simply call your test command (eg, npm test or pytest) in a run: step. 
+
+2. action/upload-artifact - Persist files from the runner to GitHub so you can download later - useful for test reports.
+
+- name: Run Tests
+    run: npm test
+
+# M4 - Secrets, Environments & Variables
+
+## Repository and organization secrets
+
+
+## Environments and protections rules
+Environments represent deployment targets (staging, production). Each can require manual approval before jobs deploy to it, protecting sensitive targets from accidental deployment.
+
+## Variables
