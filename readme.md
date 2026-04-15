@@ -93,4 +93,27 @@ Key Concept
 2. on key - defines the trigger
 3. jobs key - set of steps
 
+# Automating CI - Build and Test
+
+## Setting up a build matrix
+Node.js v18, 20, 25
+### `strategy.matrix`
+- an object under the job definition that defines variable axes.
+
+- `${{ matrix.variable }}`
+Expression syntax to refernce a matrix variable in your step commands - eg, node-version `${{matrix.node}}`
+
+    `strategy:`
+        `matrix:`
+            `node-version: ${{matrix.node}}`
+
+## Caching dependencies
+actions/cache
+cache key - A harsh-based string indentifying a specific cache. typically includes the OS and a hash of your lock file
+restore-keys
+
+Setup cache key using hashFiles
+use key: ${{runner.os}}-node-${{hashFiles('**/package-lock.json')}}
+
+## Running Tests and uploading results
 
