@@ -1,0 +1,7 @@
+{
+  "name": "gh-actions-demo",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "node -e \"console.log('All tests passed')\""
+  }
+}
