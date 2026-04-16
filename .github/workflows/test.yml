@@ -18,7 +18,7 @@ jobs:
         - uses: actions/setup-node@v3
           with:
             node-version: '20.x'
-            registry-url: 'https://registry.npmjs.org/'
+            registry-url: https://registry.npmjs.org/gh-actions-demo
         - name: Publish to GitHub Packages
           run: npm publish
           env:
