@@ -1,4 +1,4 @@
-name: Build and publish a package to npm
+name: Build and publish a package to npm - 01
 on:
   release:
     types: [created]
