@@ -142,3 +142,56 @@ Key concepts
 Environments represent deployment targets (staging, production). Each can require manual approval before jobs deploy to it, protecting sensitive targets from accidental deployment.
 
 ## Variables
+
+
+# Day 2
+
+What is GitHub Script?
+The actions/github-script action test you write inline JavaScript inside your workflow.
+
+Key objects 
+1. github - is authenticated Octokit client - use to call any GitHub API.
+2. context - is the payload - contains repo name, issue number, PR details, actor...
+
+#### Common automation tasks
+
+Auto-Comment on new issues: github.rest.issues.createComment() 
+Add labels: github.rest.issues.addLabels() 
+Close stale issues: github.rest.issues.update({state: 'close'})
+
+`uses: actions/github-script@v6`
+
+#### Pass outputs to later steps
+
+core.setOutput('mykey', value) - reference with  ${{steps.YOUR_STEP_ID.outputs.mykey}}
+
+# Leverage GitHub Actions to publish to GitHub Packages
+What is GitHub Packages?
+A package a registry built into GitHub.
+
+Reqistries
+1. Gihub Packages - josts the language packages - (npm, Maven, etc)
+2. GitHub Container Registry (GHCR) - hosts the Docker/OCI container images at ghcr.io
+
+Authenticate in Github
+
+env:
+    registry: https://registry.npmjs.org/
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '14'
+          registry-url: ${{ env.registry }}
+      - name: Publish to npm
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+## Verify and manage pluched packages
+After the workflow runs, find published packages on the repo's main page  - Packages

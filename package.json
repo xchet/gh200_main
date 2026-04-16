@@ -3,5 +3,8 @@
   "version": "1.0.0",
   "scripts": {
     "test": "node -e \"console.log('All tests passed')\""
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
   }
 }

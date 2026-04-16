@@ -12,8 +12,6 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v2
-            - name: Show evn variables
-              run: echo "App Name: ${APP_NAME}"
             - name: Set up Node.js
               uses: actions/setup-node@v3
               with:
